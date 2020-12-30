@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace OpenClassRoom_Methode_Extension
 {
@@ -6,7 +7,24 @@ namespace OpenClassRoom_Methode_Extension
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string chaineNormale = "Bonjour à tous";
+            string chaineCryptee = chaineNormale.Crypte();
+            Console.WriteLine(chaineCryptee);
+            chaineNormale = chaineCryptee.Decrypte();
+            Console.WriteLine(chaineNormale);
+        }
+    }
+
+    public static class Encodage
+    {
+        public static string Crypte(this string chaine)
+        {
+            return Convert.ToBase64String(Encoding.Default.GetBytes(chaine));
+        }
+
+        public static string Decrypte(this string chaine)
+        {
+            return Encoding.Default.GetString(Convert.FromBase64String(chaine));
         }
     }
 }
